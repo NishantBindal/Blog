@@ -46,10 +46,10 @@ app.directive('postsPagination', function(){
     restrict: 'E',
     template: '<ul class="pager" ng-show="pager">'+
     '<li class="previous" ng-show="currentPage != 1">'+
-    '<a href="#" ng-click="postRefresh(currentPage-1)">&larr; Newer Posts</a>'+
+    '<a ng-click="postRefresh(currentPage-1)">&larr; Newer Posts</a>'+
     '</li>'+
     '<li class="next" ng-show="currentPage != totalPages">'+
-    '<a href="#" ng-click="postRefresh(currentPage+1)">Older Posts &rarr;</a>'+
+    '<a ng-click="postRefresh(currentPage+1)">Older Posts &rarr;</a>'+
     '</li>'+
     '</ul>'
   };
@@ -156,6 +156,7 @@ app.controller('mainController', function($scope, $http, $sce, $timeout, $stateP
     });
   };
 $scope.postRefresh=function(currentPage){
+  $scope.buttonClicked=true;
   $scope.currentPage=currentPage;
   if($scope.totalPosts.length-currentPage*5<0){
     $scope.posts = $scope.totalPosts.slice((currentPage-1)*5,currentPage*5);
